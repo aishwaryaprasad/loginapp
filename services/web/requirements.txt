@@ -1,0 +1,11 @@
+flask
+flask-sqlalchemy
+flask-login
+werkzeug
+pandas
+Flask-Bootstrap
+flask-wtf
+email_validator
+alembic
+psycopg2-binary==2.8.6
+gunicorn==20.1.0

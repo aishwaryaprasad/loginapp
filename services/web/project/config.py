@@ -1,0 +1,1 @@
+DATABASE_URI = 'sqlite://///home/hp/aiswarya/user_login/database.db'
