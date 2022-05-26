@@ -1,22 +1,23 @@
-from flask_sqlalchemy  import SQLAlchemy
-from flask_login import UserMixin
 import os
 import sys
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-from project import db
 
-DATABASE_URI = os.getenv("DATABASE_URL", "sqlite://")
-engine = create_engine(DATABASE_URI)
+from project import app, db
+
+engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
 Base = declarative_base()
 Base.query = db_session.query_property()
+
 
 class User(Base):
     __tablename__ = 'user'
@@ -36,6 +37,7 @@ class User(Base):
 
     def is_anonymous(self):
         return False
+
 
 Session = sessionmaker(bind=engine)
 session = Session()
